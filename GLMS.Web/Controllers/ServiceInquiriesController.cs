@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 namespace GLMS.Web.Controllers
 {
     [AdminAuthorize]
-    public class CustomerQueriesController : Controller
+    public class ServiceInquiriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerQueriesController(ApplicationDbContext context)
+        public ServiceInquiriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var queries = await _context.CustomerQueries
+            var queries = await _context.ServiceInquiries
                 .OrderByDescending(q => q.SubmittedAt)
                 .ToListAsync();
 
@@ -26,12 +26,12 @@ namespace GLMS.Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var query = await _context.CustomerQueries.FindAsync(id);
+            var query = await _context.ServiceInquiries.FindAsync(id);
 
             if (query == null)
                 return NotFound();
 
-            _context.CustomerQueries.Remove(query);
+            _context.ServiceInquiries.Remove(query);
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Customer query deleted successfully.";

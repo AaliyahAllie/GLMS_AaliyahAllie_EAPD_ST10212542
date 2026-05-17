@@ -41,7 +41,7 @@ namespace GLMS.Web.Controllers
             {
                 query.SubmittedAt = DateTime.Now;
 
-                _context.CustomerQueries.Add(query);
+                _context.ServiceInquiries.Add(query);
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Thank you. Your logistics query has been submitted successfully.";

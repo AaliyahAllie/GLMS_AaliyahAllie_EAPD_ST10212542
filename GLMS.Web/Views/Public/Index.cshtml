@@ -2,23 +2,31 @@
     ViewData["Title"] = "TechMove Logistics";
 }
 
-<section class="hero-section">
-    <div class="hero-content">
-        <p class="hero-label">Global Logistics Partner</p>
-        <h1>Moving freight across borders with confidence.</h1>
-        <p>
-            TechMove Logistics provides reliable international freight coordination,
-            contract-based logistics support, and service request management for global businesses.
-        </p>
+<section class="public-hero">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <p class="hero-label">Global Logistics Partner</p>
+            <h1>Moving freight across borders with confidence.</h1>
+            <p>
+                TechMove Logistics provides reliable international freight coordination,
+                contract-based logistics support, and service request management for global businesses.
+            </p>
 
-        <div class="hero-buttons">
-            <a asp-controller="Public" asp-action="Services" class="btn btn-primary">Our Services</a>
-            <a asp-controller="Public" asp-action="Contact" class="btn btn-light text-primary fw-semibold">Make an Inquiry</a>
+            <div class="hero-buttons">
+                <a asp-controller="Public" asp-action="Services" class="btn btn-primary">Our Services</a>
+                <a asp-controller="Public" asp-action="Contact" class="btn btn-light text-primary fw-semibold">Make an Inquiry</a>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <img src="~/images/logistics-hero.jpg"
+                 class="img-fluid rounded-4 shadow public-hero-img"
+                 alt="Global freight logistics" />
         </div>
     </div>
 </section>
 
-<section class="feature-section">
+<section class="feature-section mt-5">
     <h2>Why choose TechMove?</h2>
 
     <div class="feature-grid">

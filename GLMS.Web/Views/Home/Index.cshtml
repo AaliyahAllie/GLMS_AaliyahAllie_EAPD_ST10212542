@@ -1,28 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "GLMS Dashboard";
+    ViewData["Title"] = "Admin Dashboard";
 }
 
-<section class="hero-section">
-    <div class="hero-content">
-        <p class="hero-label">TechMove Logistics</p>
-        <h1>Global Logistics Management System</h1>
-        <p>
-            Manage international freight clients, contracts, signed agreements,
-            and service requests from one central enterprise platform.
-        </p>
+<section class="admin-hero">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <p class="hero-label">Admin Portal</p>
+            <h1>Global Logistics Management System</h1>
+            <p>
+                Manage TechMove Logistics clients, contracts, signed agreements,
+                service requests, and operational workflow rules from one secure dashboard.
+            </p>
 
-        <div class="hero-buttons">
-            <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">Manage Clients</a>
-            <a asp-controller="Contracts"
-               asp-action="Index"
-               class="btn btn-light text-primary fw-semibold border-0">
-                View Contracts
-            </a>
+            <div class="hero-buttons">
+                <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">Manage Clients</a>
+                <a asp-controller="Contracts" asp-action="Index" class="btn btn-light text-primary fw-semibold">View Contracts</a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <img src="~/images/admin-dashboard.jpg"
+                 class="img-fluid rounded-4 shadow admin-hero-img"
+                 alt="Admin logistics dashboard" />
         </div>
     </div>
 </section>
 
-<section class="dashboard-grid">
+<section class="dashboard-grid mt-5">
     <div class="dashboard-card">
         <h3>@ViewBag.ClientCount</h3>
         <p>Total Clients</p>
@@ -44,8 +48,8 @@
     </div>
 </section>
 
-<section class="feature-section">
-    <h2>Core System Features</h2>
+<section class="feature-section mt-5">
+    <h2>Admin System Features</h2>
 
     <div class="feature-grid">
         <div class="feature-card">

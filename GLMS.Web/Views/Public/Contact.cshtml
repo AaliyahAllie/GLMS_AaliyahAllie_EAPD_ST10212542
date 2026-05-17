@@ -4,7 +4,10 @@
     ViewData["Title"] = "Contact Us";
 }
 
-<h1>Contact TechMove Logistics</h1>
+<section class="page-header">
+    <h1>Contact TechMove Logistics</h1>
+    <p>Submit a logistics query and our team will assist with your service request.</p>
+</section>
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -13,8 +16,8 @@
     </div>
 }
 
-<div class="row">
-    <div class="col-md-7">
+<div class="row g-4">
+    <div class="col-lg-7">
         <div class="card p-4">
             <h4>Submit a Logistics Query</h4>
 
@@ -62,12 +65,17 @@
         </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-lg-5">
+        <img src="~/images/contact-office.jpg"
+             class="img-fluid rounded-4 shadow mb-4"
+             alt="TechMove logistics support office" />
+
         <div class="card p-4">
             <h4>Contact Details</h4>
             <p><strong>Email:</strong> support@techmove-logistics.com</p>
             <p><strong>Phone:</strong> +27 21 555 1200</p>
             <p><strong>Location:</strong> Cape Town, South Africa</p>
+            <p><strong>Business Hours:</strong> Monday - Friday, 08:00 - 17:00</p>
         </div>
     </div>
 </div>

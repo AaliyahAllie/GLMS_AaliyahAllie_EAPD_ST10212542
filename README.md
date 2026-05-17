@@ -1,76 +1,109 @@
 # Global Logistics Management System (GLMS)
 
-A centralized enterprise logistics management platform developed using **ASP.NET Core MVC**, **Entity Framework Core**, and **SQL Server**.
-The system was designed for **TechMove Logistics** to replace outdated spreadsheet and email-based workflows with a modern web application for managing clients, contracts, service requests, and financial calculations. 
+Enterprise logistics management platform built using **ASP.NET Core MVC**, **SQL Server**, and **Entity Framework Core** for TechMove Logistics.
 
 ---
 
-# 📌 Project Overview
+# Project Overview
 
-The **Global Logistics Management System (GLMS)** is a monolithic enterprise web application that allows administrators to:
+TechMove Logistics previously relied on spreadsheets, emails, and manual processes to manage freight contracts and service requests. This resulted in workflow bottlenecks, lost invoices, compliance issues, and fragmented data management.
 
-* Manage logistics clients
-* Create and manage contracts
-* Upload and download signed agreements
-* Create service requests linked to contracts
-* Convert USD values to ZAR using a live exchange rate API
-* Search and filter contracts
-* Enforce workflow validation rules
-* Run automated unit tests
+The **Global Logistics Management System (GLMS)** was developed to centralize logistics operations into a single enterprise web platform.
 
-The application centralizes logistics operations into a single platform to improve compliance, efficiency, and data management. 
+The system includes:
 
----
-
-# 🛠️ Technologies Used
-
-| Component       | Technology                   |
-| --------------- | ---------------------------- |
-| Frontend        | ASP.NET Core MVC + Bootstrap |
-| Backend         | C# ASP.NET Core              |
-| Database        | SQL Server                   |
-| ORM             | Entity Framework Core        |
-| Testing         | xUnit                        |
-| API Integration | HttpClient                   |
+* Client management
+* Contract management
+* Service request management
+* Currency conversion
+* PDF agreement uploads
+* Workflow validation
+* Public customer website
+* Secure admin portal
+* Unit testing
 
 ---
 
-# 🏗️ System Architecture
+# Technologies Used
 
-The project follows the **Model-View-Controller (MVC)** architecture pattern.
+| Component       | Technology                         |
+| --------------- | ---------------------------------- |
+| Frontend        | ASP.NET Core MVC + Bootstrap       |
+| Backend         | C# ASP.NET Core                    |
+| Database        | SQL Server                         |
+| ORM             | Entity Framework Core              |
+| Authentication  | ASP.NET Core Cookie Authentication |
+| API Integration | HttpClient                         |
+| Testing         | xUnit                              |
 
-## Models
+---
 
-The system includes the following core models:
+# System Architecture
+
+The project follows the **Model-View-Controller (MVC)** architecture pattern and uses a **Monolithic Architecture** where frontend, backend logic, and database access are contained within a single deployable application.
+
+## MVC Components
+
+### Models
 
 * Client
 * Contract
 * ContractStatus
 * ServiceRequest
 * ServiceRequestStatus
+* ServiceInquiry
+* LoginViewModel
 
-## Views
-
-Razor Views together with Bootstrap were used to build a responsive user interface.
-
-## Controllers
-
-The following controllers handle application logic:
+### Controllers
 
 * HomeController
 * ClientsController
 * ContractsController
 * ServiceRequestsController
+* PublicController
 
-The application uses a **monolithic architecture**, meaning the frontend, backend, and database access are contained within a single deployable application. 
+### Views
+
+Razor Views and Bootstrap were used to create a responsive enterprise user interface.
 
 ---
 
-# 📂 Features
+# Public Website
 
-## 👥 Client Management
+The public-facing website allows customers to:
 
-Administrators can:
+* View company information
+* Browse logistics services
+* Learn about TechMove Logistics
+* Submit logistics service inquiries
+
+## Public Pages
+
+* Home
+* About Us
+* Services
+* Contact Us
+
+---
+
+# Admin Portal
+
+The administrator portal is protected using **ASP.NET Core Cookie Authentication**.
+
+Only authenticated administrators can access:
+
+* Client Management
+* Contract Management
+* Service Requests
+* Dashboard Analytics
+* PDF Agreement Uploads
+* Workflow Validation
+
+---
+
+# Features
+
+## Client Management
 
 * Create clients
 * Edit client information
@@ -79,209 +112,200 @@ Administrators can:
 
 ---
 
-## 📄 Contract Management
+## Contract Management
 
-The system supports:
-
-* Contract creation
-* Contract assignment to clients
-* Contract status management
-* Uploading signed agreements
-* Downloading agreements
+* Create contracts
+* Assign contracts to clients
+* Manage contract statuses
+* Upload signed agreements
+* Download signed agreements
+* Search/filter contracts
 
 ---
 
-## 🚚 Service Requests
-
-Administrators can:
+## Service Requests
 
 * Create service requests
 * Link requests to contracts
-* Calculate local ZAR costs
-* View request details
+* Automatically convert USD to ZAR
+* View service request details
 
 ---
-
-# ✅ Implemented Enterprise Features
 
 ## Workflow Validation
 
-Business rules prevent service requests from being created for contracts with an:
+Workflow validation prevents service requests from being created for contracts with the following statuses:
 
-* Expired status
-* OnHold status
+| Contract Status | Service Request Allowed |
+| --------------- | ----------------------- |
+| Draft           | Yes                     |
+| Active          | Yes                     |
+| Expired         | No                      |
+| OnHold          | No                      |
 
-This validation is handled through the `ContractWorkflowService`.
+Validation was implemented using the `ContractWorkflowService`.
 
 ---
 
-## 🌍 External API Integration
+## External API Integration
 
 The system integrates with a currency exchange API using `HttpClient` to retrieve live USD-to-ZAR exchange rates.
 
----
+Features include:
 
-## 📁 File Handling
-
-PDF upload and download functionality was implemented for signed agreements with validation to ensure only valid PDF files are accepted.
-
----
-
-## 🔍 Search and Filtering
-
-LINQ-based filtering allows administrators to search contracts by:
-
-* Date range
-* Contract status
+* Automatic currency conversion
+* Live exchange rate retrieval
+* Fallback exchange rate handling
 
 ---
 
-## ⚡ Async/Await Support
+## File Handling
 
-Asynchronous programming was implemented using `async` and `await` to improve:
+The system supports PDF agreement uploads and downloads.
 
-* Database performance
-* API responsiveness
-* File upload efficiency
+Validation includes:
 
----
+* PDF-only uploads
+* MIME type validation
+* File extension validation
+* Empty file prevention
 
-## 🎨 Responsive UI
+Uploaded files are stored inside:
 
-Bootstrap was used to create a responsive and modern interface including:
-
-* Dashboards
-* Navigation menus
-* Styled forms
-* Responsive tables
-
----
-
-# 🗄️ Database Design
-
-The application uses **SQL Server** with the following primary tables:
-
-* Clients
-* Contracts
-* ServiceRequests
-
-### Contract Status Values
-
-| Value | Status  |
-| ----- | ------- |
-| 0     | Draft   |
-| 1     | Active  |
-| 2     | Expired |
-| 3     | OnHold  |
-
-### Service Request Status Values
-
-| Value | Status    |
-| ----- | --------- |
-| 0     | Pending   |
-| 1     | Approved  |
-| 2     | Completed |
-| 3     | Cancelled |
-
----
-
-# 🧪 Unit Testing
-
-Automated testing was implemented using **xUnit**.
-
-Tests include:
-
-* Contract Workflow Service Tests
-* Currency Service Tests
-* File Validation Service Tests
-
----
-
-# 🚀 Future Improvements
-
-Potential future enhancements include:
-
-* Microservices architecture
-* Role-based authentication
-* Cloud deployment using Microsoft Azure
-* Real-time notifications
-* Advanced reporting dashboards
-* API integrations with logistics providers
-
----
-
-# 📷 Screenshots
-
-Add your screenshots here:
-
-* Dashboard
-* Client Management
-* Contract Management
-* Service Requests
-* Unit Tests
-* Database ERD
-
----
-
-#  🔗 Links
-* gituhub repo: https://github.com/AaliyahAllie/GLMS_AaliyahAllie_EAPD_ST10212542.git
-* youtube demo link: 
-
----
-# ⚙️ Installation
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/glms.git
+```text
+wwwroot/uploads/contracts
 ```
 
 ---
 
-## 2. Open the Project
+## Search and Filtering
 
-Open the solution in:
+LINQ-based filtering allows administrators to:
 
-* Visual Studio 2022 or later
+* Search by contract status
+* Filter by start date
+* Filter by end date
 
 ---
 
-## 3. Configure Database
+## Async/Await Implementation
 
-Update your `appsettings.json` connection string:
+Asynchronous programming was implemented using `async` and `await` for:
+
+* Database queries
+* File uploads
+* API requests
+* Data saving
+
+---
+
+# Database Design
+
+## Main Tables
+
+* Clients
+* Contracts
+* ServiceRequests
+* ServiceInquiries
+
+## SQL Server
+
+The project uses SQL Server together with Entity Framework Core.
+
+Database migrations were implemented using EF Core migrations.
+
+---
+
+# Unit Testing
+
+Unit tests were implemented using **xUnit**.
+
+## Tested Components
+
+* Contract Workflow Validation
+* Currency Conversion Logic
+* File Validation Service
+
+---
+
+# Project Structure
+
+```text
+GLMS.Web
+│
+├── Controllers
+├── Models
+├── Views
+├── Data
+├── Services
+├── Migrations
+├── wwwroot
+│   ├── css
+│   ├── images
+│   └── uploads
+```
+
+---
+
+# Setup Instructions
+
+## Clone Repository
+
+```bash
+git clone https://github.com/AaliyahAllie/GLMS_AaliyahAllie_EAPD_ST10212542.git
+```
+
+---
+
+## Configure Database
+
+Update `appsettings.json`:
 
 ```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER;Database=GLMS_DB;Trusted_Connection=True;TrustServerCertificate=True;"
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOURSERVER;Database=GLMS_DB;Trusted_Connection=True;TrustServerCertificate=True"
+  }
 }
 ```
 
 ---
 
-## 4. Run Database Migrations
+## Run Database Migrations
 
 ```bash
-Update-Database
+dotnet ef database update
 ```
 
 ---
 
-## 5. Run the Application
-
-Press:
+## Run Application
 
 ```bash
-F5
-```
-
-or
-
-```bash
-Ctrl + F5
+dotnet run
 ```
 
 ---
 
-# 📘 Conclusion
+# Admin Login
 
-The Global Logistics Management System successfully transformed manual logistics management processes into a centralized enterprise solution. By combining ASP.NET Core MVC, SQL Server, Entity Framework Core, workflow validation, external API integration, file handling, asynchronous programming, and automated testing, the system improves operational efficiency, compliance, and scalability for TechMove Logistics. 
+```text
+Username: admin
+Password: Admin@123
+```
+
+---
+
+# Links
+
+| Platform     | Link                                                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| GitHub       | [GLMS GitHub Repository](https://github.com/AaliyahAllie/GLMS_AaliyahAllie_EAPD_ST10212542.git?utm_source=chatgpt.com) |
+| YouTube Demo | [GLMS System Demonstration](https://youtu.be/qcLyIenQOZA?utm_source=chatgpt.com)                                       |
+
+---
+
+# Conclusion
+
+The Global Logistics Management System successfully replaced manual logistics management processes with a centralized enterprise solution for TechMove Logistics. The system implemented ASP.NET Core MVC, SQL Server integration, Entity Framework Core, workflow validation, external API integration, file handling, async programming, and automated unit testing. Overall, the project improves operational efficiency, contract compliance, customer communication, and centralized data management while providing a scalable foundation for future enterprise development.
+

@@ -2,9 +2,9 @@
 
 namespace GLMS.Web.Models
 {
-    public class CustomerQuery
+    public class ServiceInquiry
     {
-        public int CustomerQueryId { get; set; }
+        public int ServiceInquiryId { get; set; }
 
         [Required]
         public string FullName { get; set; } = string.Empty;
@@ -17,7 +17,7 @@ namespace GLMS.Web.Models
         public string CompanyName { get; set; } = string.Empty;
 
         [Required]
-        public string ServiceNeeded { get; set; } = string.Empty;
+        public string ServiceType { get; set; } = string.Empty;
 
         [Required]
         public string Message { get; set; } = string.Empty;

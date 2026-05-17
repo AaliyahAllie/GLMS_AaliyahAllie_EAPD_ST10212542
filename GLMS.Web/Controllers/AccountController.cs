@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GLMS.Web.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GLMS.Web.Controllers
 {
@@ -17,26 +21,38 @@ namespace GLMS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             var adminUsername = _configuration["AdminLogin:Username"];
             var adminPassword = _configuration["AdminLogin:Password"];
 
-            if (username == adminUsername && password == adminPassword)
+            if (model.Username == adminUsername && model.Password == adminPassword)
             {
-                HttpContext.Session.SetString("AdminLoggedIn", "true");
-                HttpContext.Session.SetString("AdminUsername", username);
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, model.Username),
+                    new Claim(ClaimTypes.Role, "Admin")
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Error = "Invalid admin username or password.";
-            return View();
+            ModelState.AddModelError("", "Invalid admin username or password.");
+            return View(model);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Clear();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Public");
         }
     }

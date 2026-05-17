@@ -14,5 +14,7 @@ namespace GLMS.Web.Data
         public DbSet<Client> Clients => Set<Client>();
         public DbSet<Contract> Contracts => Set<Contract>();
         public DbSet<ServiceRequest> ServiceRequests => Set<ServiceRequest>();
+
+        public DbSet<CustomerQuery> CustomerQueries => Set<CustomerQuery>();
     }
 }

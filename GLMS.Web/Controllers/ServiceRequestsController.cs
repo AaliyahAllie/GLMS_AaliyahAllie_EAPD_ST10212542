@@ -1,14 +1,14 @@
 ﻿using GLMS.Web.Data;
 using GLMS.Web.Models;
 using GLMS.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GLMS.Web.Helpers;
 
 namespace GLMS.Web.Controllers
 {
-    [AdminAuthorize]
+    [Authorize]
     public class ServiceRequestsController : Controller
     {
         private readonly ApplicationDbContext _context;

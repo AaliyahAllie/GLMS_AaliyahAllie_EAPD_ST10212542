@@ -1,11 +1,11 @@
 ﻿using GLMS.Web.Data;
-using GLMS.Web.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GLMS.Web.Controllers
 {
-    [AdminAuthorize]
+    [Authorize]
     public class ServiceInquiriesController : Controller
     {
         private readonly ApplicationDbContext _context;

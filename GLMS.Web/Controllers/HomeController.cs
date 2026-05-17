@@ -1,12 +1,12 @@
 using GLMS.Web.Data;
 using GLMS.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GLMS.Web.Helpers;
 
 namespace GLMS.Web.Controllers
 {
-    [AdminAuthorize]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
